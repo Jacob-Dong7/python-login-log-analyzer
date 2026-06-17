@@ -9,19 +9,22 @@ class Analyzer:
             parts = line.split()
             
             if parts[3] == "status=failed":
-                if parts[2] not in suspect_ip:
-                    suspect_ip[parts[2]] = 1
+                if parts[4] not in suspect_ip:
+                    suspect_ip[parts[4]] = 1
                 else:
-                    suspect_ip[parts[2]] += 1
+                    suspect_ip[parts[4]] += 1
         risk_factor = self.sort(list(suspect_ip.items()))
         print(risk_factor)
             
         
     def sort(self, suspect):
+        print(suspect[0])
         n = len(suspect)
         if n > 1:
             b = self.sort(suspect[0: n // 2 - 1])
             c = self.sort(suspect[n + 1: n - 1])
+            print(b)
+            print(c)
             return self.merge(b, c, suspect)
     
     def merge(self, b, c, a):
