@@ -13,19 +13,27 @@ class Analyzer:
                     suspect_ip[parts[4]] = 1
                 else:
                     suspect_ip[parts[4]] += 1
-        risk_factor = self.sort(list(suspect_ip.items()))
-        print(risk_factor)
+        suspect_list = list(suspect_ip.items())
+        risk_factor = self.sort(suspect_list)
+        self.displayResult(risk_factor)
+        
+    def displayResult(self, risk):
+        print("===========================================")
+        print("REPORT")
+        print("===========================================")
+        for i in range(len(risk)):
+            print(f"There were {risk[i][1]} unsuccessful login attempts from {risk[i][0]}\n")
+        print("===========================================")
             
         
     def sort(self, suspect):
-        print(suspect[0])
-        n = len(suspect)
-        if n > 1:
-            b = self.sort(suspect[0: n // 2 - 1])
-            c = self.sort(suspect[n + 1: n - 1])
-            print(b)
-            print(c)
+        mid = len(suspect) //2
+        if len(suspect) > 1:
+            b = self.sort(suspect[:mid])
+            c = self.sort(suspect[mid:])
             return self.merge(b, c, suspect)
+        else:
+            return suspect
     
     def merge(self, b, c, a):
         i = 0
@@ -47,12 +55,11 @@ class Analyzer:
         while i < len(b):
             a[k] = b[i]
             i += 1
-            k += 1
-        return
+            k += 1 
+    
+        return a
 
 
 
         
                 
-
-        return
