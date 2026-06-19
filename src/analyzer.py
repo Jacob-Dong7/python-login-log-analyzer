@@ -18,12 +18,21 @@ class Analyzer:
         self.displayResult(risk_factor)
         
     def displayResult(self, risk):
-        print("===========================================")
+        print("====================================================")
         print("REPORT")
-        print("===========================================")
+        print("====================================================")
         for i in range(len(risk)):
-            print(f"There were {risk[i][1]} unsuccessful login attempts from {risk[i][0]}\n")
-        print("===========================================")
+            attempt = risk[i][1]
+            ip = risk[i][0]
+            if attempt >= 4:
+                print("HIGH RISK: ")
+            elif attempt >= 3:
+                print("MODERATE RISK: ")
+            else:
+                print("LOW RISK: ")
+            print(f"There was {attempt} unsuccessful login attempts from {ip}\n")
+
+        print("====================================================")
             
         
     def sort(self, suspect):
